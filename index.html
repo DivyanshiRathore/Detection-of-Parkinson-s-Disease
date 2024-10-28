@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Parkinson's Disease Detection</h1>
+        <form action="/predict" method="post">
+            <label for="model">Choose a model:</label>
+            <select name="model" id="model">
+                <option value="Logistic Regression">Logistic Regression</option>
+                <option value="Random Forest">Random Forest</option>
+                <option value="Decision Tree">Decision Tree</option>
+                <option value="Naive Bayes">Naive Bayes</option>
+                <option value="K-Nearest Neighbors">K-Nearest Neighbors</option>
+            </select>
+            <br><br>
+            <button type="submit">Run Model</button>
+        </form>
+        
+        {% if accuracy_train %}
+        <h2>Model Evaluation</h2>
+        <h3>Train Set</h3>
+        <p>Accuracy: {{ accuracy_train }}</p>
+        <p>Confusion Matrix: {{ cm_train }}</p>
+        <p>Classification Report:</p>
+        <pre>{{ report_train }}</pre>
+
+        <h3>Test Set</h3>
+        <p>Accuracy: {{ accuracy_test }}</p>
+        <p>Confusion Matrix: {{ cm_test }}</p>
+        <p>Classification Report:</p>
+        <pre>{{ report_test }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>
